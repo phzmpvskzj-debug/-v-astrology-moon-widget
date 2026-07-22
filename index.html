@@ -88,7 +88,7 @@ h1{font-size:33px;line-height:1.1;margin:0 0 7px;font-weight:700;letter-spacing:
   const DEG=Math.PI/180, RAD=180/Math.PI;
   const norm=x=>((x%360)+360)%360;
   const signs=["Овен","Телец","Близнаци","Рак","Лъв","Дева","Везни","Скорпион","Стрелец","Козирог","Водолей","Риби"];
-  const glyphs=["♈","♉","♊","♋","♌","♍","♎","♏","♐","♑","♒","♓"];
+  const glyphs=["♈︎","♉︎","♊︎","♋︎","♌︎","♍︎","♎︎","♏︎","♐︎","♑︎","♒︎","♓︎"];
   const signLabel=lon=>glyphs[Math.floor(norm(lon)/30)]+" "+signs[Math.floor(norm(lon)/30)];
 
   const now=new Date();
