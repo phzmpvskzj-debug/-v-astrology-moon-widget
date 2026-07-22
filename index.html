@@ -154,11 +154,22 @@ h1{font-size:33px;line-height:1.1;margin:0 0 7px;font-weight:700;letter-spacing:
     if(p<.783)return"Последна четвърт";
     return"Намаляващ сърп";
   }
-  function nextPhase(targetAge){
-    let delta=targetAge-age;
-    if(delta<=0)delta+=SYNODIC;
-    return new Date(now.getTime()+delta*86400000);
-  }
+  const moonEvents=[
+  {type:"full",date:new Date("2026-07-29T14:35:00Z")},
+  {type:"new",date:new Date("2026-08-12T17:37:00Z")},
+  {type:"full",date:new Date("2026-08-28T04:18:00Z")},
+  {type:"new",date:new Date("2026-09-11T03:27:00Z")},
+  {type:"full",date:new Date("2026-09-26T16:49:00Z")},
+  {type:"new",date:new Date("2026-10-10T15:50:00Z")},
+  {type:"full",date:new Date("2026-10-26T04:11:00Z")},
+  {type:"new",date:new Date("2026-11-09T07:03:00Z")},
+  {type:"full",date:new Date("2026-11-24T14:53:00Z")},
+  {type:"new",date:new Date("2026-12-09T00:52:00Z")},
+  {type:"full",date:new Date("2026-12-24T01:28:00Z")}
+];
+document.getElementById("nextNew").textContent=f.format(nextMoonEvent("new"));
+document.getElementById("nextFull").textContent=f.format(nextMoonEvent("full"));
+}
 
   const f=new Intl.DateTimeFormat("bg-BG",{day:"numeric",month:"long"});
   const fl=new Intl.DateTimeFormat("bg-BG",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
