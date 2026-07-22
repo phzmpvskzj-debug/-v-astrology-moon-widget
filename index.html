@@ -179,7 +179,10 @@ document.getElementById("phaseName").textContent=phaseName(phase);
 document.getElementById("dateText").textContent=fl.format(now);
 document.getElementById("moonSign").textContent="☽ "+signLabel(moonLon);
 document.getElementById("sunSign").textContent="☉ "+signLabel(sunLon);
-document.getElementById("illumination").textContent=Math.round(illum*100)+"%";
+const referenceNewMoon=new Date("2026-07-14T09:43:00Z");
+const accurateAge=((now-referenceNewMoon)/86400000)%SYNODIC;
+const accurateIllum=(1-Math.cos(2*Math.PI*accurateAge/SYNODIC))/2;
+document.getElementById("illumination").textContent=Math.round(accurateIllum*100)+"%";
 document.getElementById("nextNew").textContent=f.format(nextMoonEvent("new"));
 document.getElementById("nextFull").textContent=f.format(nextMoonEvent("full"));
 
