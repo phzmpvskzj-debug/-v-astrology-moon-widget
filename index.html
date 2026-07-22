@@ -36,13 +36,7 @@ background-position:50% 50%;
   box-shadow:inset -16px -10px 28px rgba(130,140,150,.18),0 14px 34px rgba(50,62,73,.18)
 }
 
-#moonShadow{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  pointer-events:none;
+.shadow{position:absolute;inset:-1px;border-radius:50%;background:#18212b;opacity:.88;transform-origin:center}
 }
 .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:650}
 h1{font-size:33px;line-height:1.1;margin:0 0 7px;font-weight:700;letter-spacing:-.02em}
@@ -66,7 +60,7 @@ h1{font-size:33px;line-height:1.1;margin:0 0 7px;font-weight:700;letter-spacing:
 </head>
 <body>
 <main class="wrap"><section class="card">
-  <div class="moon"><canvas id="moonShadow" width="330" height="330"></canvas></div>
+  <div class="moon"><div class="shadow" id="shadow"></div></div>
   <div>
     <div class="eyebrow">V. Astrology · Небето в момента</div>
     <h1 id="phaseName">Нарастваща Луна</h1> 
@@ -189,7 +183,7 @@ document.getElementById("illumination").textContent=Math.round(accurateIllum*100
 document.getElementById("nextNew").textContent=f.format(nextMoonEvent("new"));
 document.getElementById("nextFull").textContent=f.format(nextMoonEvent("full"));
 
-  cconst canvas=document.getElementById("moonShadow");
+const canvas=document.getElementById("moonShadow");
 const ctx=canvas.getContext("2d");
 const size=canvas.width;
 const center=size/2;
