@@ -167,10 +167,13 @@ h1{font-size:33px;line-height:1.1;margin:0 0 7px;font-weight:700;letter-spacing:
   {type:"new",date:new Date("2026-12-09T00:52:00Z")},
   {type:"full",date:new Date("2026-12-24T01:28:00Z")}
 ];
+
+function nextMoonEvent(type){
+  return moonEvents.find(event=>event.type===type && event.date>now)?.date;
+
+
 document.getElementById("nextNew").textContent=f.format(nextMoonEvent("new"));
 document.getElementById("nextFull").textContent=f.format(nextMoonEvent("full"));
-}
-
   const f=new Intl.DateTimeFormat("bg-BG",{day:"numeric",month:"long"});
   const fl=new Intl.DateTimeFormat("bg-BG",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
 
