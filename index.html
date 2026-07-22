@@ -36,7 +36,14 @@ background-position:50% 50%;
   box-shadow:inset -16px -10px 28px rgba(130,140,150,.18),0 14px 34px rgba(50,62,73,.18)
 }
 
-.shadow{position:absolute;inset:-1px;border-radius:50%;background:#18212b;opacity:.88;transform-origin:center}
+#moonShadow{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  pointer-events:none;
+}
 .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:650}
 h1{font-size:33px;line-height:1.1;margin:0 0 7px;font-weight:700;letter-spacing:-.02em}
 .date{font-size:15px;color:var(--muted);margin-bottom:18px}
@@ -59,7 +66,7 @@ h1{font-size:33px;line-height:1.1;margin:0 0 7px;font-weight:700;letter-spacing:
 </head>
 <body>
 <main class="wrap"><section class="card">
-  <div class="moon-area"><div class="moon"><div class="shadow" id="shadow"></div></div></div>
+  <div class="moon"><canvas id="moonShadow" width="330" height="330"></canvas></div>
   <div>
     <div class="eyebrow">V. Astrology · Небето в момента</div>
     <h1 id="phaseName">Нарастваща Луна</h1> 
@@ -182,12 +189,37 @@ document.getElementById("illumination").textContent=Math.round(accurateIllum*100
 document.getElementById("nextNew").textContent=f.format(nextMoonEvent("new"));
 document.getElementById("nextFull").textContent=f.format(nextMoonEvent("full"));
 
-  const shadow=document.getElementById("shadow");
-  let tx,sx;
-  if(phase<=.5){tx=-100+phase*400;sx=Math.abs(Math.cos(Math.PI*phase))}
-  else{tx=100-(phase-.5)*400;sx=Math.abs(Math.cos(Math.PI*phase))}
-  shadow.style.transform=`translateX(${tx}%) scaleX(${Math.max(sx,.03)})`;
-  shadow.style.background=phase<.5?"#18212b":"#f7f7f3";
+  cconst canvas=document.getElementById("moonShadow");
+const ctx=canvas.getContext("2d");
+const size=canvas.width;
+const center=size/2;
+const radius=center;
+const image=ctx.createImageData(size,size);
+const pixels=image.data;
+const angle=2*Math.PI*phase;
+
+for(let py=0;py<size;py++){
+  for(let px=0;px<size;px++){
+    const x=(px-center)/radius;
+    const y=(py-center)/radius;
+    const r2=x*x+y*y;
+
+    if(r2<=1){
+      const z=Math.sqrt(1-r2);
+      const light=x*Math.sin(angle)-z*Math.cos(angle);
+      const softness=0.035;
+      const shadowAmount=Math.max(0,Math.min(1,(-light+softness)/(softness*2)));
+      const index=(py*size+px)*4;
+
+      pixels[index]=18;
+      pixels[index+1]=25;
+      pixels[index+2]=34;
+      pixels[index+3]=Math.round(225*shadowAmount);
+    }
+  }
+}
+
+ctx.putImageData(image,0,0);
 })();
 </script>
 </body>
