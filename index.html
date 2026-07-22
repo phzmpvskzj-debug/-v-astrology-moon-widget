@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="bg">
-<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>V. Astrology — Небето в момента</title>
@@ -29,18 +28,15 @@ body{
 .moon-area{display:grid;place-items:center}
 .moon{
   width:165px;height:165px;border-radius:50%;position:relative;overflow:hidden;
-  background:#f7f7f3;
+  background:
+  radial-gradient(circle at 35% 30%,rgba(255,255,255,.22),transparent 45%),
+  url("https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg");
+background-size:330% 165%;
+background-position:50% 50%;
   box-shadow:inset -16px -10px 28px rgba(130,140,150,.18),0 14px 34px rgba(50,62,73,.18)
 }
-.moon:before{
-  content:"";position:absolute;inset:0;border-radius:50%;z-index:2;
-  background:
-    radial-gradient(circle at 33% 30%,rgba(160,166,172,.18) 0 5%,transparent 6%),
-    radial-gradient(circle at 62% 58%,rgba(155,162,168,.13) 0 7%,transparent 8%),
-    radial-gradient(circle at 48% 72%,rgba(135,143,150,.10) 0 4%,transparent 5%),
-    radial-gradient(circle at 68% 27%,rgba(145,153,160,.10) 0 3%,transparent 4%)
-}
-.shadow{position:absolute;inset:-1px;border-radius:50%;background:#18212b;opacity:.93;transform-origin:center}
+
+.shadow{position:absolute;inset:-1px;border-radius:50%;background:#18212b;opacity:.88;transform-origin:center}
 .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:650}
 h1{font-size:33px;line-height:1.1;margin:0 0 7px;font-weight:700;letter-spacing:-.02em}
 .date{font-size:15px;color:var(--muted);margin-bottom:18px}
