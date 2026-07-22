@@ -239,14 +239,21 @@ h1{
   const illumination=(1-Math.cos(2*Math.PI*phase))/2;
 
   function phaseName(p){
-    if(p<.033||p>=.967)return "Новолуние";
-    if(p<.217)return "Нарастващ сърп";
-    if(p<.283)return "Първа четвърт";
-    if(p<.467)return "Нарастваща Луна";
-    if(p<.533)return "Пълнолуние";
-    if(p<.717)return "Намаляваща Луна";
-    if(p<.783)return "Последна четвърт";
-    return "Намаляващ сърп";
+  const light=(1-Math.cos(2*Math.PI*p))/2;
+
+  if(light<0.02)return "Новолуние";
+  if(light>0.98)return "Пълнолуние";
+
+  if(p<0.5){
+    if(light<0.45)return "Нарастващ сърп";
+    if(light<=0.55)return "Първа четвърт";
+    return "Нарастваща Луна";
+  }
+
+  if(light>0.55)return "Намаляваща Луна";
+  if(light>=0.45)return "Последна четвърт";
+  return "Намаляващ сърп";
+}
   }
 
   function nextEvent(targetPhase){
