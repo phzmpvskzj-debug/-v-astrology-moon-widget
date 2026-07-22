@@ -230,7 +230,7 @@ h1{
     -0.015*Math.sin((2*F-2*D)*DEG)
     +0.011*Math.sin((M-4*D)*DEG);
 
-  cconst moonLon=Astronomy.EclipticGeoMoon(now).elon;
+  const moonLon=Astronomy.EclipticGeoMoon(now).elon;
 
   // Проверена отправна точка: новолуние на 12 август 2026, 17:37 UTC
   const referenceNewMoon=new Date("2026-08-12T17:37:00Z");
