@@ -170,20 +170,18 @@ h1{font-size:33px;line-height:1.1;margin:0 0 7px;font-weight:700;letter-spacing:
 
 function nextMoonEvent(type){
   return moonEvents.find(event=>event.type===type && event.date>now)?.date;
+}
 
+const f=new Intl.DateTimeFormat("bg-BG",{day:"numeric",month:"long"});
+const fl=new Intl.DateTimeFormat("bg-BG",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
 
+document.getElementById("phaseName").textContent=phaseName(phase);
+document.getElementById("dateText").textContent=fl.format(now);
+document.getElementById("moonSign").textContent="☽ "+signLabel(moonLon);
+document.getElementById("sunSign").textContent="☉ "+signLabel(sunLon);
+document.getElementById("illumination").textContent=Math.round(illum*100)+"%";
 document.getElementById("nextNew").textContent=f.format(nextMoonEvent("new"));
 document.getElementById("nextFull").textContent=f.format(nextMoonEvent("full"));
-  const f=new Intl.DateTimeFormat("bg-BG",{day:"numeric",month:"long"});
-  const fl=new Intl.DateTimeFormat("bg-BG",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
-
-  document.getElementById("phaseName").textContent=phaseName(phase);
-  document.getElementById("dateText").textContent=fl.format(now);
-  document.getElementById("moonSign").textContent="☽ "+signLabel(moonLon);
-  document.getElementById("sunSign").textContent="☉ "+signLabel(sunLon);
-  document.getElementById("illumination").textContent=Math.round(illum*100)+"%";
-  document.getElementById("nextNew").textContent=f.format(nextPhase(0));
-  document.getElementById("nextFull").textContent=f.format(nextPhase(SYNODIC/2));
 
   const shadow=document.getElementById("shadow");
   let tx,sx;
